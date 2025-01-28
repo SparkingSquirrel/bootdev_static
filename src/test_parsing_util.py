@@ -23,7 +23,6 @@ class TestParsingUtil(unittest.TestCase):
                          TextNode("More text with ", TextType.TEXT),
                          TextNode("more code", TextType.CODE),
                          TextNode(" words", TextType.TEXT)]
-        print(f'NEW NODES: {new_nodes}')
         self.assertEqual(new_nodes, correct_nodes)
 
     def test_single_node_pipe(self):
