@@ -24,8 +24,8 @@ class TestTextNode(unittest.TestCase):
         node2 = TextNode('This is a text node', TextType.BOLD, 'a different url')
         self.assertNotEqual(node, node2)
 
-    def test_convert_normal(self):
-        text = TextNode('Normal text', TextType.NORMAL)
+    def test_convert_text(self):
+        text = TextNode('Normal text', TextType.TEXT)
         html = text.text_node_to_html_node()
         self.assertEqual('Normal text', html.to_html())
 
