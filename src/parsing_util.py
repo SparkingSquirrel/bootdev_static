@@ -1,6 +1,7 @@
-#some cross-class parsing utils
-from textnode import TextNode, TextType
 import re
+
+from textnode import TextNode, TextType
+
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_nodes = []
@@ -22,16 +23,6 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
         new_nodes.extend(split_nodes)
     return new_nodes
 
-
-def extract_markdown_images(text):
-    # images
-    image_re = r"!\[([^\[\]]*)\]\(([^\(\)]*)\)"
-    return(re.findall(image_re, text))
-
-def extract_markdown_links(text):
-    # regular links
-    link_re = r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)"
-    return(re.findall(link_re, text))
 
 def split_nodes_image(old_nodes):
     new_nodes = []
@@ -85,4 +76,25 @@ def split_nodes_link(old_nodes):
         if original_text != "":
             new_nodes.append(TextNode(original_text, TextType.TEXT))
     return new_nodes
+
+
+def extract_markdown_images(text):
+    pattern = r"!\[([^\[\]]*)\]\(([^\(\)]*)\)"
+    matches = re.findall(pattern, text)
+    return matches
+
+
+def extract_markdown_links(text):
+    pattern = r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)"
+    matches = re.findall(pattern, text)
+    return matches
+
+def text_to_textnodes(text):
+    nodes = [TextNode(text, TextType.TEXT)]
+    nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD)
+    nodes = split_nodes_delimiter(nodes, "*", TextType.ITALIC)
+    nodes = split_nodes_delimiter(nodes, "`", TextType.CODE)
+    nodes = split_nodes_image(nodes)
+    nodes = split_nodes_link(nodes)
+    return nodes
 
