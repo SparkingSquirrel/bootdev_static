@@ -1,5 +1,5 @@
 from enum import Enum
-from leafnode import LeafNode
+from htmlnode import LeafNode
 
 class TextType(Enum):
     TEXT = 'text'
@@ -34,7 +34,7 @@ def text_node_to_html_node(self):
         case TextType.CODE:
             return LeafNode('code', self.text)
         case TextType.LINK:
-            return LeafNode('a', self.text, {'href', self.url})
+            return LeafNode('a', self.text, {'href': self.url})
         case TextType.IMAGE:
             return LeafNode('img', '', {'src': self.url, 'alt': self.text})
         case _:

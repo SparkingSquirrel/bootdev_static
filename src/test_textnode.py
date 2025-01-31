@@ -1,7 +1,7 @@
 import unittest
 
 from textnode import TextNode, TextType, text_node_to_html_node
-from leafnode import LeafNode
+from htmlnode import LeafNode
 
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
@@ -44,15 +44,15 @@ class TestTextNode(unittest.TestCase):
         html = text_node_to_html_node(text)
         self.assertEqual('<code>Code text</code>', html.to_html())
 
-    def test_convert_link(self): #revise once properties
+    def test_convert_link(self):
         text = TextNode('Anchor text', TextType.LINK, 'linkurl')
         html = text_node_to_html_node(text)
-        self.assertEqual('<a>Anchor text</a>', html.to_html())
+        self.assertEqual('<a href="linkurl">Anchor text</a>', html.to_html())
 
-    def test_convert_image(self): #revise once properties
+    def test_convert_image(self):
         text = TextNode('image alt', TextType.IMAGE, 'imageurl')
         html = text_node_to_html_node(text)
-        self.assertEqual('<img></img>', html.to_html())
+        self.assertEqual('<img src="imageurl" alt="image alt"></img>', html.to_html())
 
 
 if __name__ == "__main__":
