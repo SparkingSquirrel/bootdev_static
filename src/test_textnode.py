@@ -1,6 +1,6 @@
 import unittest
 
-from textnode import TextNode, TextType
+from textnode import TextNode, TextType, text_node_to_html_node
 from leafnode import LeafNode
 
 class TestTextNode(unittest.TestCase):
@@ -26,32 +26,32 @@ class TestTextNode(unittest.TestCase):
 
     def test_convert_text(self):
         text = TextNode('Normal text', TextType.TEXT)
-        html = text.text_node_to_html_node()
+        html = text_node_to_html_node(text)
         self.assertEqual('Normal text', html.to_html())
 
     def test_convert_bold(self):
         text = TextNode('Bold text', TextType.BOLD)
-        html = text.text_node_to_html_node()
+        html = text_node_to_html_node(text)
         self.assertEqual('<b>Bold text</b>', html.to_html())
 
     def test_convert_italic(self):
         text = TextNode('Italic text', TextType.ITALIC)
-        html = text.text_node_to_html_node()
+        html = text_node_to_html_node(text)
         self.assertEqual('<i>Italic text</i>', html.to_html())
 
     def test_convert_code(self):
         text = TextNode('Code text', TextType.CODE)
-        html = text.text_node_to_html_node()
+        html = text_node_to_html_node(text)
         self.assertEqual('<code>Code text</code>', html.to_html())
 
     def test_convert_link(self): #revise once properties
         text = TextNode('Anchor text', TextType.LINK, 'linkurl')
-        html = text.text_node_to_html_node()
+        html = text_node_to_html_node(text)
         self.assertEqual('<a>Anchor text</a>', html.to_html())
 
     def test_convert_image(self): #revise once properties
         text = TextNode('image alt', TextType.IMAGE, 'imageurl')
-        html = text.text_node_to_html_node()
+        html = text_node_to_html_node(text)
         self.assertEqual('<img></img>', html.to_html())
 
 
