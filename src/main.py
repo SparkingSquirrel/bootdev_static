@@ -1,11 +1,15 @@
+import os
+import shutil
 from textnode import *
 
 def main():
-    node1 = TextNode('testing text', TextType.BOLD)
+    static_to_public()
 
-    node2 = TextNode('image?', TextType.IMAGE, 'urltext')
-    print(node1)
-    print(node2)
+def static_to_public():
+    #clean public
+    if os.path.exists('public'):
+        shutil.rmtree('public')
+    shutil.copytree('static', 'public')
 
 if __name__ == "__main__":
     main()
